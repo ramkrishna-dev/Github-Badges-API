@@ -47,8 +47,6 @@ dependencies = [
     "apscheduler>=3.10.0",
     "websockets>=12.0",
     "cryptography>=42.0.0",
-    "hmac>=1.0",
-    "hashlib>=1.0",
 ]
 
 [project.optional-dependencies]
