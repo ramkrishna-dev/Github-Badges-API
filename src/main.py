@@ -52,6 +52,8 @@ async def add_process_time_header(request: Request, call_next):
 
 @app.on_event("startup")
 async def startup_event():
+    from .analytics import init_db
+    await init_db()
     load_plugins()
 
 @app.get("/", response_class=HTMLResponse)
