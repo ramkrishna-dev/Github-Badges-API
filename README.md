@@ -97,7 +97,7 @@ kubectl apply -f k8s/
 
 ### Vercel (Serverless)
 
-Use Python runtime, adapt for serverless.
+Use Vercel Python runtime.
 
 ### Fly.io
 
@@ -105,6 +105,18 @@ Use Python runtime, adapt for serverless.
 fly launch
 fly deploy
 ```
+
+### Cloudflare Workers
+
+A JavaScript version is available for edge deployment:
+
+1. Install Wrangler: `npm install -g wrangler`
+2. Set your GitHub token: `wrangler secret put GITHUB_TOKEN`
+3. Deploy: `wrangler deploy`
+
+Example URLs:
+- `https://your-worker.workers.dev/badge/github/microsoft/vscode/stars`
+- `https://your-worker.workers.dev/badge/custom?label=Build&value=Passing`
 
 ### Cloudflare Workers
 
