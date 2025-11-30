@@ -82,7 +82,7 @@ async def websocket_live_badge(websocket: WebSocket, provider: str, owner: str, 
 
 @app.get("/", response_class=HTMLResponse)
 async def root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "version": "2.0.0"})
+    return templates.TemplateResponse("dashboard.html", {"request": request, "version": "3.0.0"})
 
 @app.get("/health")
 async def health():
