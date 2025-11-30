@@ -42,11 +42,12 @@ async def add_process_time_header(request: Request, call_next):
     response = await call_next(request)
     process_time = time.time() - start_time
     response.headers["X-Badge-Generated-In"] = f"{process_time:.3f}s"
-    # ETag for caching
-    content = response.body
-    etag = hashlib.md5(content).hexdigest()
-    response.headers["ETag"] = etag
-    response.headers["Cache-Control"] = "public, max-age=300"
+    # ETag for caching (only for Response, not StreamingResponse)
+    if hasattr(response, 'body'):
+        content = response.body
+        etag = hashlib.md5(content).hexdigest()
+        response.headers["ETag"] = etag
+        response.headers["Cache-Control"] = "public, max-age=300"
     return response
 
 @app.on_event("startup")
