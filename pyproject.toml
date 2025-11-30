@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "github-badge-api"
-version = "3.0.0"
+version = "3.5.0"
 description = "A high-performance, scalable API for generating dynamic SVG badges for GitHub repositories"
 authors = [
     {name = "Ramkrishna", email = "ramkrishna@code-xon.com"},
@@ -47,6 +47,8 @@ dependencies = [
     "apscheduler>=3.10.0",
     "websockets>=12.0",
     "cryptography>=42.0.0",
+    "hmac>=1.0",
+    "hashlib>=1.0",
 ]
 
 [project.optional-dependencies]

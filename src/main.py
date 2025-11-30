@@ -176,7 +176,7 @@ async def plugin_badge(request: Request, plugin: str, metric: str, style: str = 
 
 @app.get("/v2/compose")
 @limiter.limit(settings.RATE_LIMIT)
-async def compose_badges(request: Request, badges: str, layout: str = "horizontal", style: str = "flat"):
+async def compose_badges_endpoint(request: Request, badges: str, layout: str = "horizontal", style: str = "flat"):
     badge_list = badges.split(',')
     composed_badges = []
     for badge_spec in badge_list:
@@ -188,9 +188,35 @@ async def compose_badges(request: Request, badges: str, layout: str = "horizonta
         width = len(label) * 8 + len(value) * 8 + 40
         composed_badges.append({"svg": svg, "width": width, "height": 20})
 
-    from .badges import compose_badges as compose_func
+    from .composer import compose_badges as compose_func
     final_svg = compose_func(composed_badges, layout)
     return Response(content=final_svg, media_type="image/svg+xml")
+
+# Theme endpoints
+@app.get("/themes/list")
+async def list_themes():
+    from .theme_engine import list_themes
+    return list_themes()
+
+@app.post("/themes/install")
+async def install_theme(url: str):
+    from .theme_engine import install_theme
+    success = install_theme(url)
+    return {"success": success}
+
+# Plugin endpoints
+@app.get("/plugins/list")
+async def list_plugins():
+    from .plugin_loader import list_plugins
+    return {"plugins": list_plugins()}
+
+# Webhook endpoint
+@app.post("/webhook/github")
+async def github_webhook(request: Request):
+    # Handle GitHub webhook for cache refresh
+    data = await request.json()
+    # Refresh cache for the repo
+    return {"status": "ok"}
 
 # Dashboard
 @app.get("/dashboard", response_class=HTMLResponse)

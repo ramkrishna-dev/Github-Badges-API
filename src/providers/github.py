@@ -81,5 +81,20 @@ async def get_github_metric(owner: str, repo: str, metric: str) -> str:
             return 'medium'
         return 'low'
 
+    elif metric == 'trophy':
+        # Trophy system based on stars
+        data = await fetch_github_data(repo_url, token)
+        stars = data.get('stargazers_count', 0)
+        if stars >= 10000:
+            return 'legendary'
+        elif stars >= 1000:
+            return 'diamond'
+        elif stars >= 100:
+            return 'gold'
+        elif stars >= 50:
+            return 'silver'
+        else:
+            return 'bronze'
+
     else:
         raise ValueError(f'Unknown metric: {metric}')

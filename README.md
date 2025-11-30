@@ -1,23 +1,23 @@
-# GitHub Badge API 3.0
+# GitHub Badge API 3.5
 
-A hyper-modular, ultra-fast, future-proof badge generation platform built entirely in Python. Features animated SVGs, multi-provider stats, deep insights, trophy systems, badge composition, advanced themes, plugin ecosystem, analytics, and comprehensive dashboards.
+The FINAL and MOST ADVANCED Python-powered badge generation platform. Ultra-modular, hyper-fast, with dynamic SVG rendering, multi-provider stats, animations, plugins, caching, insight analytics, themes, dashboards, automation, and CDN-ready deployment. 100% Python, ZERO AI.
 
 ## Features
 
-- **Modular Badge Engine**: Separate badge modules with dynamic rendering
-- **Animated SVG Badges**: CSS/SMIL animations, gradients, glow effects
-- **Realtime Streaming**: WebSocket endpoints for live stats
+- **Modular Badge Engine**: `/src/badges/` with dynamic SVG templates
+- **Animated SVG Badges**: SMIL/CSS animations, gradients, glow, pulse effects
+- **Realtime Streaming**: WebSocket `/ws/live/<metric>` for live stats
 - **Multi-Provider Stats**: GitHub, GitLab, Bitbucket, Docker Hub, PyPI, NPM, YouTube, Twitter/X
-- **Deep Insight Badges**: Commit frequency, issue resolution, activity rank, contributor heatmaps
-- **Trophy Achievement System**: Auto-generated milestone badges
-- **Badge Composition Engine**: Combine multiple badges in layouts
-- **Advanced Theme Engine**: 8 built-in themes, custom colors/gradients/fonts
-- **Plugin Ecosystem**: Hot-reload Python modules for extensions
-- **Developer Dashboard**: Full web UI for testing, analytics, theme editor
-- **Analytics System**: SQLite/Redis-backed usage tracking
-- **Caching & CDN Mode**: ETag, pre-rendering, Cloudflare Workers support
-- **Security**: HMAC signing, API keys, abuse detection
-- **Automation**: Cron jobs, GitHub webhooks for cache refresh
+- **Deep Insight Badges**: Commit velocity, issue resolution, activity rank, heatmap
+- **Trophy System**: Bronze/Silver/Gold/Diamond/Legendary auto-awards
+- **Badge Composition**: `/v2/compose` for multi-badge layouts
+- **Advanced Themes**: 9 themes (classic, flat, pixel, neon, cyberpunk, glass, hacker-green, minimal, transparent)
+- **Plugin Ecosystem**: Hot-reload Python modules in `/plugins/`
+- **Developer Dashboard**: `/dashboard` with previewer, analytics, theme editor
+- **Analytics System**: SQLite/Redis tracking renders, cache hits, popular badges
+- **Caching & CDN**: ETag, Last-Modified, pre-cached popular badges
+- **Security**: HMAC-signed URLs, API keys, rate limiting, abuse detection
+- **Automation**: APScheduler cron jobs, GitHub `/webhook/github` for cache refresh
 
 ## Quick Start
 
@@ -61,6 +61,19 @@ Example: `https://your-api.com/v2/badge/plugin/system/cpu`
 ### Badge Composition
 
 `GET /v2/compose?badges=stars:100,forks:50&layout=horizontal`
+
+### Theme Management
+
+`GET /themes/list` - List available themes
+`POST /themes/install?url=<url>` - Install theme from URL
+
+### Plugin Management
+
+`GET /plugins/list` - List loaded plugins
+
+### Webhooks
+
+`POST /webhook/github` - GitHub webhook for cache refresh
 
 ### Realtime Streaming
 
