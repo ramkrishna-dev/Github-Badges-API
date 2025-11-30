@@ -1,19 +1,23 @@
-# GitHub Badge API 2.0
+# GitHub Badge API 3.0
 
-A next-generation, ultra-fast, modular badge generation platform with real-time GitHub metrics, customizable themes, analytics insights, and a plugin ecosystem. Built with FastAPI for maximum performance.
+A hyper-modular, ultra-fast, future-proof badge generation platform built entirely in Python. Features animated SVGs, multi-provider stats, deep insights, trophy systems, badge composition, advanced themes, plugin ecosystem, analytics, and comprehensive dashboards.
 
 ## Features
 
-- **Modular Badge Engine**: Pluggable system for adding new badge types
-- **Real-time GitHub Metrics**: Stars, forks, issues, PRs, commits, contributors, size, releases, license, CI status, branch-specific badges
-- **Custom & Themed Badges**: Presets (classic, neon, cyberpunk, minimal, transparent), gradients, icons, font balancing
-- **Analytics System**: Track renders, popular badges/repos, daily stats
-- **CDN Caching**: ETags, Last-Modified headers, Cloudflare-compatible
-- **Rate Limiting & Protection**: IP-based, token premium, bot detection
-- **API v2**: RESTful endpoints, OpenAPI docs, JSON/SVG responses
-- **Developer Dashboard**: Web UI for testing, managing keys, viewing charts
-- **Plugin Ecosystem**: Extend with Discord, Twitter, YouTube, system load plugins
-- **Deployment Suite**: Docker, Kubernetes, Helm, multi-cloud guides
+- **Modular Badge Engine**: Separate badge modules with dynamic rendering
+- **Animated SVG Badges**: CSS/SMIL animations, gradients, glow effects
+- **Realtime Streaming**: WebSocket endpoints for live stats
+- **Multi-Provider Stats**: GitHub, GitLab, Bitbucket, Docker Hub, PyPI, NPM, YouTube, Twitter/X
+- **Deep Insight Badges**: Commit frequency, issue resolution, activity rank, contributor heatmaps
+- **Trophy Achievement System**: Auto-generated milestone badges
+- **Badge Composition Engine**: Combine multiple badges in layouts
+- **Advanced Theme Engine**: 8 built-in themes, custom colors/gradients/fonts
+- **Plugin Ecosystem**: Hot-reload Python modules for extensions
+- **Developer Dashboard**: Full web UI for testing, analytics, theme editor
+- **Analytics System**: SQLite/Redis-backed usage tracking
+- **Caching & CDN Mode**: ETag, pre-rendering, Cloudflare Workers support
+- **Security**: HMAC signing, API keys, abuse detection
+- **Automation**: Cron jobs, GitHub webhooks for cache refresh
 
 ## Quick Start
 
@@ -36,23 +40,31 @@ uvicorn src.main:app --host 0.0.0.0 --port 8000
 
 ### V2 GitHub Badges
 
-`GET /v2/badge/github/{owner}/{repo}/{metric}?style=flat&color=blue&icon=github&format=svg`
+`GET /v2/badge/github/{owner}/{repo}/{metric}?style=flat&color=blue&icon=github&animated=false&format=svg`
 
-Supported metrics: stars, forks, watchers, open_issues, open_prs, last_commit, contributors, size, release, license, ci_status, branch_commits, release_downloads
+Supported metrics: stars, forks, watchers, open_issues, open_prs, last_commit, contributors, size, release, license, ci_status, commit_frequency, activity_rank
 
-Example: `https://your-api.com/v2/badge/github/microsoft/vscode/stars?style=neon&format=json`
+Example: `https://your-api.com/v2/badge/github/microsoft/vscode/stars?style=neon&animated=true&format=json`
 
 ### V2 Custom Badges
 
-`GET /v2/badge/custom?label=Hello&value=World&color=blue&style=flat&icon=star&format=svg`
+`GET /v2/badge/custom?label=Hello&value=World&color=blue&style=flat&icon=star&animated=false&format=svg`
 
-Example: `https://your-api.com/v2/badge/custom?label=Build&value=Passing&color=green&style=cyberpunk`
+Example: `https://your-api.com/v2/badge/custom?label=Build&value=Passing&color=green&style=cyberpunk&animated=true`
 
 ### V2 Plugin Badges
 
-`GET /v2/badge/plugin/{plugin}/{metric}?style=flat&format=svg`
+`GET /v2/badge/plugin/{plugin}/{metric}?style=flat&animated=false&format=svg`
 
 Example: `https://your-api.com/v2/badge/plugin/system/cpu`
+
+### Badge Composition
+
+`GET /v2/compose?badges=stars:100,forks:50&layout=horizontal`
+
+### Realtime Streaming
+
+`WS /ws/live/{provider}/{owner}/{repo}` - Live badge stats via WebSocket
 
 ### V1 Compatibility
 

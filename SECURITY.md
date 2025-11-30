@@ -1,16 +1,20 @@
 # Security Policy
 
-## Reporting Security Vulnerabilities
+## Reporting Vulnerabilities
 
-If you discover a security vulnerability, please report it to security@code-xon.com instead of creating a public issue.
+Report security issues to security@code-xon.com
 
-## Security Considerations
+## Security Features
 
-- Rate limiting is implemented to prevent abuse
-- GitHub tokens are optional and should be kept secret
-- No user data is stored; all requests are stateless
-- SVG output is sanitized to prevent XSS
+- Rate limiting to prevent abuse
+- Input validation and sanitization
+- HMAC-signed URLs (optional)
+- API key authentication
+- Bot detection heuristics
 
-## Responsible Disclosure
+## Best Practices
 
-We appreciate your help in keeping our users safe. We will acknowledge your report within 48 hours and provide a more detailed response within 7 days.
+- Keep GitHub tokens secure
+- Use HTTPS in production
+- Regularly update dependencies
+- Monitor for unusual activity

@@ -2,15 +2,11 @@
 
 ## Overview
 
-The GitHub Badge API 2.0 supports a plugin system to extend badge capabilities beyond GitHub metrics.
+The GitHub Badge API 3.0 supports a plugin system to extend functionality with new badge providers, themes, and effects.
 
-## Creating a Plugin
+## Creating a Provider Plugin
 
-1. Create `plugins/your_plugin.py`
-2. Implement `async def get_metric(metric: str) -> str`
-3. Return the value as a string
-
-Example:
+Create `src/plugins/your_provider.py`:
 
 ```python
 import httpx
@@ -23,13 +19,21 @@ async def get_metric(metric: str) -> str:
     raise ValueError("Unknown metric")
 ```
 
-4. Access via `/v2/badge/plugin/your_plugin/followers`
+Access via `/v2/badge/plugin/your_provider/followers`
 
-## Built-in Plugins
+## Built-in Providers
 
-- **system**: cpu, memory, disk
-- Add more in the plugins/ directory
+- **github**: GitHub repository stats
+- **system**: System load metrics
+
+## Theme Plugins
+
+Plugins can add new themes by modifying `src/themes/__init__.py`.
+
+## Hot Reload
+
+Plugins are loaded on startup. Restart the server to reload changes.
 
 ## Security
 
-Plugins run in the same process. Ensure they are trusted.
+Plugins run in the same process. Only install trusted plugins.
